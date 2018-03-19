@@ -1,0 +1,48 @@
+class Solution(object):
+    def fourSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        nums.sort()
+        list = []
+        l = len(nums)
+        for i in range(l-3):
+            if nums[i] > target/4.0:
+                break
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+            target2 = target - nums[i]
+            for j in range(i+1, l-2):
+                if nums[j] > target2/3.0:
+                    break
+                if j > i+1 and nums[j] == nums[j-1]:
+                    continue
+                target3 = target2 - nums[j]
+                k = j + 1
+                m = l - 1
+                if nums[k] > target3/2.0:
+                    continue
+                if nums[m] < target3/2.0:
+                    continue
+                while k < m:
+                    sum = nums[k] + nums[m]
+                    if sum == target3:
+                        list.append([nums[i],nums[j],nums[k],nums[m]])
+                        kk = nums[k]
+                        k += 1
+                        while k < m and nums[k] == kk:
+                            k += 1
+                        mm = nums[m]
+                        m -= 1
+                        while k < m-1 and nums[m+1] == mm:
+                            m -= 1
+                    elif sum < target3:
+                        k += 1
+                    else:
+                        m -= 1
+        return list
+
+s = Solution()
+print s.fourSum([1,0,-1,0,-2,2],0)
