@@ -46,3 +46,4 @@ class Solution(object):
 
 s = Solution()
 print s.fourSum([1,0,-1,0,-2,2],0)
+
